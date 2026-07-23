@@ -1,0 +1,18 @@
+{
+    "resource": "https://www.adquick.com/mcp",
+    "authorization_servers": [
+        "https://www.adquick.com"
+    ],
+    "scopes_supported": [
+        "inventory_read",
+        "campaign_read",
+        "campaign_write",
+        "programmatic_read"
+    ],
+    "bearer_methods_supported": [
+        "header"
+    ],
+    "resource_signing_alg_values_supported": [
+        "RS256"
+    ]
+}

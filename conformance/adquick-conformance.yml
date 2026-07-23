@@ -1,0 +1,36 @@
+generated: '2026-07-17'
+method: searched
+source: https://www.adquick.com/.well-known/oauth-authorization-server
+notes: >-
+  Cross-cutting standards conformance, confirmed from live OAuth discovery metadata, the MCP usage
+  documentation, and a live api.adquick.com error response. No published third-party compliance
+  certifications (SOC 2 / ISO 27001 / PCI / HIPAA) were found, so no Compliance pointer is emitted.
+standards:
+- id: oauth2
+  conforms: true
+  evidence: MCP server exposes OAuth 2.0 authorization_code + refresh_token grants
+- id: oauth2-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported = [S256]
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server returns 200 with full metadata
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: true
+  evidence: /.well-known/oauth-protected-resource returns 200 with resource + scopes
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint advertised; MCP docs state Dynamic (RFC 7591)
+- id: rfc9457-problem-details
+  conforms: true
+  evidence: api.adquick.com returns application/problem+json (type/title/status/instance)
+- id: model-context-protocol
+  conforms: true
+  evidence: hosted MCP server, Streamable HTTP, protocol versions 2025-06-18/2025-03-26/2024-11-05
+- id: oidc-discovery
+  conforms: false
+  evidence: /.well-known/openid-configuration not confirmed (Cloudflare 403)
+- id: fhir-r4
+  conforms: false
+- id: scim2
+  conforms: false

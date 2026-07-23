@@ -1,8 +1,28 @@
 aid: adquick
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adquick.png
 name: AdQuick
-description: 'AdQuick is a company surfaced as a portfolio company of initialized-capital and added to
-  the API Evangelist network as a stub for enrichment. Sector: enterprise-saas. This profile is a lead
-  awaiting the enrichment pipeline.'
+description: >-
+  AdQuick is an intelligence and marketplace platform for out-of-home (OOH) advertising that lets
+  advertisers plan, buy, execute, and measure billboard, transit, street-furniture, and programmatic
+  digital-out-of-home (DOOH) campaigns across a network of 1,500+ media owners covering close to 100%
+  of US OOH supply. AdQuick exposes a partner REST API (X-PARTNER-TOKEN authentication) at
+  api.adquick.com for planning guaranteed and auction OOH campaigns, placing insertion orders,
+  submitting and scheduling creatives, and pulling in-flight delivery reporting, plus a hosted Model
+  Context Protocol (MCP) server (OAuth 2.0 + PKCE) at www.adquick.com/mcp that gives AI agents
+  natural-language access to inventory discovery, campaign management, market analytics, exports, and
+  programmatic DSP tooling. Backed by Initialized Capital.
 url: https://raw.githubusercontent.com/api-evangelist/adquick/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -16,7 +36,34 @@ modified: '2026-07-17'
 tags:
 - Company
 - Enterprise Saas
-apis: []
+- Advertising
+- Out Of Home Advertising
+- DOOH
+- Programmatic Advertising
+- Media Buying
+- Marketing
+- MCP
+apis:
+- name: AdQuick Partner API
+  description: >-
+    REST API for planning and launching guaranteed and auction out-of-home (OOH) campaigns, placing
+    insertion orders, submitting and scheduling creatives, and gathering in-flight delivery reporting.
+    Authenticated with an X-PARTNER-TOKEN header. Errors are returned as RFC 9457 problem+json.
+  humanURL: https://docs.adquick.com/
+  baseURL: https://api.adquick.com
+  tags:
+  - Advertising
+  - Out Of Home Advertising
+  - Campaigns
+  properties:
+  - type: Authentication
+    url: authentication/adquick-authentication.yml
+  - type: OAuthScopes
+    url: scopes/adquick-scopes.yml
+  - type: ErrorCatalog
+    url: errors/adquick-problem-types.yml
+  - type: Conventions
+    url: conventions/adquick-conventions.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -24,4 +71,44 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: http://adquick.com
+  url: https://www.adquick.com
+- type: DeveloperPortal
+  url: https://docs.adquick.com/
+- type: Documentation
+  url: https://docs.adquick.com/
+- type: APIReference
+  url: https://docs.adquick.com/campaigns
+- type: GettingStarted
+  url: https://docs.adquick.com/
+- type: Blog
+  url: https://blog.adquick.com/
+- type: Support
+  url: https://help.adquick.com/
+- type: GitHubOrganization
+  url: https://github.com/adquick
+- type: PrivacyPolicy
+  url: https://www.adquick.com/privacy
+- type: MCPServer
+  name: AdQuick MCP Server
+  url: mcp/adquick-mcp.yml
+- type: Authentication
+  url: authentication/adquick-authentication.yml
+- type: OAuthScopes
+  url: scopes/adquick-scopes.yml
+- type: ErrorCatalog
+  url: errors/adquick-problem-types.yml
+- type: Conventions
+  url: conventions/adquick-conventions.yml
+- type: Conformance
+  url: conformance/adquick-conformance.yml
+- type: WellKnown
+  url: well-known/adquick-well-known.yml
+- type: DomainSecurity
+  url: security/adquick-domain-security.yml
+- type: LLMsTxt
+  url: llms/adquick-llms.txt
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

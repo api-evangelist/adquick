@@ -1,0 +1,26 @@
+generated: '2026-07-17'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.adquick.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 10 07:22:01 2026 GMT
+  hsts: null
+- host: docs.adquick.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  8 12:44:36 2026 GMT
+  hsts: null
+- host: api.adquick.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 13 17:17:07 2026 GMT
+  hsts: null
+domains:
+- domain: adquick.com
+  dnssec: true
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

@@ -1,0 +1,51 @@
+generated: '2026-07-17'
+method: searched
+source: https://api.adquick.com/
+format: rfc9457
+notes: >-
+  Confirmed live: api.adquick.com returns RFC 9457 (application/problem+json) error responses. The
+  envelope carries type/title/status/instance plus a trace object (timestamp, requestId, buildId,
+  rayId). The `type` URI resolves to httpproblems.com/http-status/<code>. Statuses below are the
+  standard HTTP set the API returns; the 404 shape was captured from a live request. The MCP server
+  at www.adquick.com/mcp returns a JSON-RPC/OAuth error shape instead
+  ({"error":"unauthorized","error_description":"The access token is invalid"}).
+envelope:
+  content_type: application/problem+json
+  fields: [type, title, status, instance, trace]
+  trace_fields: [timestamp, requestId, buildId, rayId]
+  type_uri_template: https://httpproblems.com/http-status/{status}
+problems:
+- status: 400
+  type: https://httpproblems.com/http-status/400
+  title: Bad Request
+- status: 401
+  type: https://httpproblems.com/http-status/401
+  title: Unauthorized
+- status: 403
+  type: https://httpproblems.com/http-status/403
+  title: Forbidden
+- status: 404
+  type: https://httpproblems.com/http-status/404
+  title: Not Found
+  confirmed_live: true
+- status: 422
+  type: https://httpproblems.com/http-status/422
+  title: Unprocessable Entity
+- status: 429
+  type: https://httpproblems.com/http-status/429
+  title: Too Many Requests
+- status: 500
+  type: https://httpproblems.com/http-status/500
+  title: Internal Server Error
+example:
+  status: 404
+  body:
+    type: https://httpproblems.com/http-status/404
+    title: Not Found
+    status: 404
+    instance: /
+    trace:
+      timestamp: '2026-07-18T01:06:35.625Z'
+      requestId: 16ce7c60-d502-49a7-a5e8-7059bd4f6823
+      buildId: 09f82dc5-4b8f-4528-b8e3-f9888551a081
+      rayId: a1cd95ac9884c420-EWR

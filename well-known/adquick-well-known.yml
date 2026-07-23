@@ -1,0 +1,35 @@
+generated: '2026-07-17'
+method: searched
+source: https://www.adquick.com/.well-known/
+host: https://www.adquick.com
+notes: >-
+  www.adquick.com serves live OAuth 2.0 authorization-server metadata (RFC 8414) and
+  OAuth protected-resource metadata (RFC 9728) for its hosted Model Context Protocol (MCP)
+  server. Most other paths (security.txt, openid-configuration, api-catalog, ai-plugin.json,
+  llms.txt) return 403 behind Cloudflare and could not be confirmed. api.adquick.com returns
+  404 (not 403) for well-known paths, i.e. reachable but none published there.
+documents:
+- path: /.well-known/oauth-authorization-server
+  status: 200
+  file: adquick-oauth-authorization-server.json
+  standard: RFC 8414
+- path: /.well-known/oauth-protected-resource
+  status: 200
+  file: adquick-oauth-protected-resource.json
+  standard: RFC 9728
+- path: /.well-known/oauth-protected-resource/mcp
+  status: 200
+  note: identical body to /.well-known/oauth-protected-resource
+- path: /.well-known/mcp
+  status: 403
+  note: Cloudflare-blocked to unauthenticated probe; referenced as MCP discovery in usage docs
+- path: /.well-known/security.txt
+  status: 403
+  note: Cloudflare-blocked (www); 404 on api.adquick.com
+- path: /.well-known/openid-configuration
+  status: 403
+  note: Cloudflare-blocked; not confirmed
+- path: /.well-known/api-catalog
+  status: 403
+- path: /.well-known/ai-plugin.json
+  status: 403

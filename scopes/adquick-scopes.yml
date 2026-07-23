@@ -1,0 +1,35 @@
+generated: '2026-07-17'
+method: searched
+source: https://www.adquick.com/.well-known/oauth-authorization-server
+docs: https://www.adquick.com/mcp/usage-documentation
+notes: >-
+  OAuth 2.0 scopes for the AdQuick MCP server. The authorization-server metadata advertises four
+  scopes (inventory_read, campaign_read, campaign_write, programmatic_read); the MCP usage
+  documentation additionally documents availability_read and supplier_inventory. All six are
+  captured. The partner REST API uses a static X-PARTNER-TOKEN header and has no OAuth scope surface.
+schemes:
+- name: MCPOAuth2
+  source: https://www.adquick.com/.well-known/oauth-authorization-server
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://www.adquick.com/mcp/oauth/authorize
+    tokenUrl: https://www.adquick.com/mcp/oauth/token
+scopes:
+- scope: inventory_read
+  description: Search and browse advertising inventory
+  advertised_in_metadata: true
+- scope: availability_read
+  description: Check unit availability
+  advertised_in_metadata: false
+- scope: supplier_inventory
+  description: View supplier-specific inventory
+  advertised_in_metadata: false
+- scope: campaign_read
+  description: Search and view campaigns
+  advertised_in_metadata: true
+- scope: campaign_write
+  description: Create, update, and manage campaigns
+  advertised_in_metadata: true
+- scope: programmatic_read
+  description: Read programmatic (DSP) plans and pacing
+  advertised_in_metadata: true

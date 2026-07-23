@@ -1,0 +1,51 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.adquick.com/
+notes: >-
+  Cross-cutting request/response semantics for the AdQuick Partner REST API and MCP server, searched
+  from the developer documentation and confirmed against live probes. No idempotency-key contract is
+  documented, so no Idempotency pointer is emitted.
+authentication:
+  rest:
+    style: static header token
+    header: X-PARTNER-TOKEN
+    ref: authentication/adquick-authentication.yml
+  mcp:
+    style: OAuth 2.0 authorization_code + PKCE
+    ref: authentication/adquick-authentication.yml
+base_urls:
+  rest: https://api.adquick.com
+  mcp: https://www.adquick.com/mcp
+pagination:
+  style: paginated arrays
+  evidence: >-
+    Documentation describes list endpoints (e.g. GET /media_types, GET /campaigns) returning
+    paginated arrays of objects.
+error_envelope:
+  format: rfc9457
+  content_type: application/problem+json
+  ref: errors/adquick-problem-types.yml
+request_tracing:
+  fields: [requestId, rayId]
+  location: error response `trace` object; rayId indicates Cloudflare fronting
+idempotency:
+  supported: unknown
+  evidence: no idempotency-key header/parameter documented
+versioning:
+  scheme: unversioned host path
+  evidence: base URL https://api.adquick.com with no version segment observed in documented paths
+rest_operations:
+  campaigns:
+  - POST /campaigns
+  - GET /campaigns
+  - GET /campaigns/:id
+  - POST /campaigns/:id/book
+  creatives:
+  - POST /creatives
+  - GET /creatives
+  - GET /creatives/:id
+  - POST /creatives/:id/campaign/:campaign_id
+  reports:
+  - GET /reports (report types vary by campaign type)
+  media_types:
+  - GET /media_types
