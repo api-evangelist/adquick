@@ -32,7 +32,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-08-13'
 tags:
 - Company
 - Enterprise Saas
@@ -64,6 +64,10 @@ apis:
     url: errors/adquick-problem-types.yml
   - type: Conventions
     url: conventions/adquick-conventions.yml
+  - type: DataModel
+    url: data-model/adquick-data-model.yml
+  - type: RateLimits
+    url: rate-limits/adquick-rate-limits.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -107,8 +111,24 @@ common:
   url: security/adquick-domain-security.yml
 - type: LLMsTxt
   url: llms/adquick-llms.txt
+- type: ToolCrosswalk
+  url: mcp/adquick-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Packages
+  url: packages/adquick-packages.yml
+- type: DataModel
+  url: data-model/adquick-data-model.yml
+- type: RateLimits
+  url: rate-limits/adquick-rate-limits.yml
+- type: Plans
+  url: plans/adquick-plans-pricing.yml
+- type: Lifecycle
+  url: lifecycle/adquick-lifecycle.yml
+- type: TrustCenter
+  url: security/adquick-trust-center.yml
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 10
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
