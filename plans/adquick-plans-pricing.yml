@@ -1,0 +1,35 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.adquick.com/pricing
+notes: >-
+  NO PUBLISHED API PRICING FOUND. AdQuick's marketing site (www.adquick.com), including /pricing and
+  /api, returns a Cloudflare 403 bot challenge to every automated request, so no tier table could be
+  read; nothing machine-readable is served in its place. The one access statement that IS published
+  in the clear is on the MCP connector documentation, which states that using the AdQuick MCP server
+  requires a Claude Pro, Team, or Enterprise plan AND an AdQuick account with MCP access enabled -
+  i.e. API/agent access is account-gated rather than sold as a self-serve API plan. The partner REST
+  API is likewise reached with an X-PARTNER-TOKEN issued to a partner, not purchased from a pricing
+  page. Recording plan_count 0 as an honest zero, not an omission.
+plan_count: 0
+plans: []
+access_model:
+  rest_api:
+    gate: partner token (X-PARTNER-TOKEN) issued by AdQuick
+    self_serve: false
+    published_price: none found
+  mcp_server:
+    gate: AdQuick account with MCP access enabled
+    client_requirement: Claude Pro, Team, or Enterprise plan
+    source: https://www.adquick.com/mcp/usage-documentation
+    published_price: none found
+x-evidence:
+- url: https://www.adquick.com/pricing
+  status: 403
+  note: Cloudflare bot challenge (HTML interstitial), not a pricing document
+- url: https://www.adquick.com/api
+  status: 403
+  note: Cloudflare bot challenge
+- url: https://www.adquick.com/mcp/usage-documentation
+  status: 200
+  note: states Claude Pro/Team/Enterprise plan and AdQuick MCP access are required
+checked: '2026-08-13'

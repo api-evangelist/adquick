@@ -1,0 +1,31 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  Packaged Agent Skills generated from the provider-published AdQuick MCP tool list
+  (mcp/adquick-mcp.yml, searched from https://www.adquick.com/mcp/usage-documentation) and the
+  documented partner REST paths (conventions/adquick-conventions.yml, from
+  https://docs.adquick.com/). AdQuick publishes NO OpenAPI, so REST steps cite documented paths
+  rather than operationIds, and every MCP tool name used below appears verbatim in the connector
+  documentation. No operation, tool or field was invented.
+notes: >-
+  The defining fact these skills encode: AdQuick's MCP server and partner REST API are different
+  surfaces, not two views of one. Discovery, analytics, exports and programmatic DSP are MCP-only;
+  creative submission and campaign BOOKING are REST-only. An agent can plan a buy end to end but
+  cannot transact without the REST partner token.
+skills:
+- file: adquick-plan-and-book-ooh-campaign.md
+  name: Plan and book an out-of-home campaign
+  api: mcp/adquick-mcp.yml
+  operations: [search_locations, list_media_types, search_inventory, check_availability, create_campaign,
+    add_units_to_campaign, 'POST /creatives', 'POST /creatives/:id/campaign/:campaign_id', 'POST /campaigns/:id/book']
+- file: adquick-market-planning-and-budget.md
+  name: Size a market and set an OOH budget
+  api: mcp/adquick-mcp.yml
+  operations: [get_audience, recommend_markets, get_location_metrics, get_location_budget, get_supplier_metrics,
+    get_supplier_bookings, generate_market_budget_export]
+- file: adquick-diagnose-programmatic-pacing.md
+  name: Diagnose programmatic DSP pacing
+  api: mcp/adquick-mcp.yml
+  operations: [get_recent_programmatic_plans, search_programmatic_campaigns, get_plans_by_date_range,
+    get_plans_not_yet_live, get_programmatic_pacing, diagnose_plan_pacing, get_campaign_delivery_status,
+    schedule_copilot_task_from_template]

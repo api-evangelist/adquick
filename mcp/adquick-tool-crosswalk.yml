@@ -1,0 +1,172 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  mcp/adquick-mcp.yml (searched from https://www.adquick.com/mcp/usage-documentation) and
+  conventions/adquick-conventions.yml (REST paths searched from https://docs.adquick.com/)
+notes: >-
+  AdQuick publishes NO OpenAPI, so the REST side of this crosswalk is a list of DOCUMENTED PATHS from
+  the developer documentation, not operationIds from a spec - there are no operationIds to bind to.
+  The MCP side is the real, provider-published tool list (39 tools) but its inputSchemas are
+  auth-gated: an anonymous tools/list POST to https://www.adquick.com/mcp returns HTTP 401
+  {"error":"unauthorized"}. Every binding below is therefore mapped by NAME AND DOCUMENTED SEMANTICS,
+  and confidence is set accordingly - never higher than medium. The dominant finding is divergence:
+  the MCP server is not a wrapper over the partner REST API, it is a much larger, separate surface.
+  36 of 39 MCP tools have no documented public REST equivalent, and the REST API's core commercial
+  act - booking a campaign (POST /campaigns/:id/book) - has no MCP tool at all.
+surfaces:
+  openapi:
+    present: false
+    note: no OpenAPI/Swagger served on api.adquick.com, www.adquick.com or docs.adquick.com (all probed 2026-08-13)
+  rest:
+    base_url: https://api.adquick.com
+    docs: https://docs.adquick.com/
+    auth: X-PARTNER-TOKEN header
+    gated: false
+    note: documentation host is Cloudflare bot-challenged; paths below are those confirmed readable
+  graphql:
+    present: false
+  mcp:
+    url: https://www.adquick.com/mcp
+    transport: Streamable HTTP
+    auth: OAuth 2.0 + PKCE (S256), dynamic client registration
+    gated: true
+    gate_evidence: 'POST tools/list -> 401 {"error":"unauthorized","error_description":"The access token is invalid"}'
+    tool_count: 39
+crosswalk:
+- tool: create_campaign
+  category: Campaign Management
+  rest:
+  - POST /campaigns
+  binding: name-and-semantics
+  confidence: medium
+  note: both create a campaign; REST requires campaign_type/partner_id/advertiser_id/start_date/end_date/target_budget_cents
+- tool: update_campaign
+  category: Campaign Management
+  rest:
+  - POST /campaigns
+  binding: partial
+  confidence: low
+  note: no documented REST update/PATCH endpoint; REST docs expose create, get, list and book only
+- tool: search_programmatic_campaigns
+  category: Programmatic DSP
+  rest:
+  - GET /campaigns
+  binding: name-and-semantics
+  confidence: low
+  note: REST list supports current_page/start_date/end_date/campaign_type/status filters; the MCP tool searches DSP plans by name
+- tool: get_campaign_delivery_status
+  category: Analytics & Insights
+  rest:
+  - GET /reports
+  binding: name-and-semantics
+  confidence: medium
+  note: REST /reports carries in-flight delivery reporting; report types vary by campaign type
+- tool: list_media_types
+  category: Inventory Discovery
+  rest:
+  - GET /media_types
+  binding: name-and-semantics
+  confidence: high
+  note: same reference data on both surfaces; MCP also exposes it as resource inventory://media-types
+mcp_only:
+- tool: search_inventory
+  reason: no public REST inventory-search endpoint documented
+- tool: check_availability
+  reason: no public REST availability endpoint documented
+- tool: find_avails
+  reason: no public REST availability endpoint documented
+- tool: get_unit_details
+  reason: no public REST unit endpoint documented
+- tool: get_supplier_inventory
+  reason: no public REST supplier endpoint documented
+- tool: list_markets
+  reason: no public REST markets endpoint documented (MCP resource inventory://markets)
+- tool: search_locations
+  reason: no public REST locations endpoint documented
+- tool: clone_campaign
+  reason: composite operation, no REST equivalent documented
+- tool: import_campaign_from_csv
+  reason: file-import operation, no REST equivalent documented
+- tool: add_units_to_campaign
+  reason: no public REST campaign-units endpoint documented
+- tool: restore_campaign_units
+  reason: no public REST campaign-units endpoint documented
+- tool: list_campaign_audiences
+  reason: no public REST audience endpoint documented
+- tool: add_audiences_to_campaign
+  reason: no public REST audience endpoint documented
+- tool: remove_audiences_from_campaign
+  reason: no public REST audience endpoint documented
+- tool: get_supplier_metrics
+  reason: analytics surface not exposed over the partner REST API
+- tool: get_supplier_bookings
+  reason: analytics surface not exposed over the partner REST API
+- tool: get_location_metrics
+  reason: analytics surface not exposed over the partner REST API
+- tool: get_location_budget
+  reason: analytics surface not exposed over the partner REST API
+- tool: get_audience
+  reason: analytics surface not exposed over the partner REST API
+- tool: recommend_markets
+  reason: AI recommendation, no REST equivalent
+- tool: generate_multi_campaign_export
+  reason: export generation not exposed over the partner REST API
+- tool: generate_multi_campaign_monthly_export
+  reason: export generation not exposed over the partner REST API
+- tool: generate_campaign_media_plan_pdf
+  reason: export generation not exposed over the partner REST API
+- tool: generate_campaign_units_tag_export
+  reason: export generation not exposed over the partner REST API
+- tool: generate_market_budget_export
+  reason: export generation not exposed over the partner REST API
+- tool: get_recent_programmatic_plans
+  reason: DSP surface not exposed over the partner REST API
+- tool: get_programmatic_pacing
+  reason: DSP surface not exposed over the partner REST API
+- tool: get_plans_by_date_range
+  reason: DSP surface not exposed over the partner REST API
+- tool: get_plans_not_yet_live
+  reason: DSP surface not exposed over the partner REST API
+- tool: diagnose_plan_pacing
+  reason: DSP surface not exposed over the partner REST API
+- tool: schedule_copilot_task_from_template
+  reason: Copilot scheduling is an MCP-native capability
+- tool: list_copilot_scheduled_tasks
+  reason: Copilot scheduling is an MCP-native capability
+- tool: cancel_copilot_scheduled_task
+  reason: Copilot scheduling is an MCP-native capability
+- tool: show_support_card
+  reason: MCP-native utility, no API equivalent
+rest_only:
+- operation: POST /campaigns/:id/book
+  note: books/purchases a campaign - NO MCP tool exposes booking; agents can plan but not transact
+- operation: GET /campaigns/:id
+  note: single-campaign retrieval has no direct MCP tool
+- operation: POST /creatives
+  note: creative submission is REST-only
+- operation: GET /creatives
+  note: creative listing is REST-only
+- operation: GET /creatives/:id
+  note: creative retrieval is REST-only
+- operation: POST /creatives/:id/campaign/:campaign_id
+  note: creative-to-campaign scheduling is REST-only
+coverage:
+  mcp_tools: 39
+  mapped_to_rest: 5
+  mcp_only: 34
+  rest_documented_operations: 11
+  rest_only: 6
+  openapi_operations: 0
+  binding_confidence:
+    high: 1
+    medium: 2
+    low: 2
+x-evidence:
+- url: https://www.adquick.com/mcp
+  status: 401
+  note: anonymous tools/list rejected; tool inputSchemas require authenticated introspection
+- url: https://docs.adquick.com/campaigns
+  status: 200
+- url: https://api.adquick.com/openapi.json
+  status: 404
+checked: '2026-08-13'

@@ -1,0 +1,60 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.adquick.com/campaigns, https://www.adquick.com/mcp/usage-documentation,
+  https://www.adquick.com/.well-known/oauth-authorization-server
+notes: >-
+  AdQuick publishes no API versioning policy, no deprecation policy, no Sunset/Deprecation header
+  contract (RFC 8594), no SLA, and no confirmable status page. The partner REST API is served from an
+  unversioned host (https://api.adquick.com) with no version segment in any documented path and no
+  version header documented. The one real lifecycle signal AdQuick does publish is on the MCP side:
+  the hosted server advertises the set of Model Context Protocol revisions it still accepts, which is
+  a genuine backward-compatibility window. status.adquick.com resolves to the same Cloudflare edge as
+  every other adquick.com subdomain and returns a 403 bot challenge, and adquick.statuspage.io
+  resolves to the Atlassian Statuspage marketing site rather than a tenant page - neither confirms a
+  status page exists, so NO StatusPage pointer is emitted. No Deprecation pointer is emitted either.
+versioning:
+  scheme: unversioned host
+  base_url: https://api.adquick.com
+  version_in_path: false
+  version_header: none documented
+  evidence: documented paths are /campaigns, /creatives, /reports, /media_types with no version segment
+deprecation_policy:
+  published: false
+  sunset_header: not documented
+  deprecation_header: not documented
+  rfc8594: false
+sla:
+  published: false
+status_page:
+  confirmed: false
+  candidates:
+  - url: https://status.adquick.com/
+    status: 403
+    note: Cloudflare bot challenge; DNS resolves to the shared adquick.com Cloudflare edge, so a 403 neither confirms nor denies a tenant
+  - url: https://status.adquick.com/api/v2/status.json
+    status: 403
+    note: Statuspage JSON API path also blocked
+  - url: https://adquick.statuspage.io/api/v2/status.json
+    status: 200
+    note: body is the Atlassian Statuspage marketing site, NOT a tenant status document - treated as a miss
+changelog:
+  published: false
+  note: no dated changelog or release-notes page found on any reachable AdQuick host
+protocol_support:
+  surface: MCP server (https://www.adquick.com/mcp)
+  supported_versions:
+  - '2025-06-18'
+  - '2025-03-26'
+  - '2024-11-05'
+  source: https://www.adquick.com/mcp/usage-documentation
+  note: three MCP protocol revisions accepted concurrently - a real backward-compatibility window
+deprecated_operations: []
+x-evidence:
+- url: https://www.adquick.com/mcp/usage-documentation
+  status: 200
+- url: https://status.adquick.com/
+  status: 403
+- url: https://www.adquick.com/changelog
+  status: 403
+checked: '2026-08-13'

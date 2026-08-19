@@ -1,0 +1,38 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.adquick.com/
+notes: >-
+  NO PUBLISHED RATE LIMITS. The AdQuick developer documentation reachable to us (the campaigns
+  reference) documents authentication, pagination and request/response fields but states no rate
+  limit, no quota, and no rate-limit response headers. The MCP connector documentation likewise
+  specifies no limits. No X-RateLimit-*, RateLimit-* or Retry-After header was observed on any live
+  unauthenticated response from api.adquick.com. The only related published signal is that the
+  partner API's RFC 9457 problem catalogue includes HTTP 429 Too Many Requests, so throttling exists
+  as a response condition even though its thresholds and headers are undocumented. Recording
+  limit_count 0 as an honest zero.
+limit_count: 0
+limits: []
+exhaustion:
+  status_code: 429
+  problem_type: https://httpproblems.com/http-status/429
+  title: Too Many Requests
+  source: errors/adquick-problem-types.yml
+  retry_after_documented: false
+headers_documented: []
+headers_observed: []
+observation:
+  host: https://api.adquick.com
+  method: GET /
+  response: 404 application/problem+json
+  rate_limit_headers_present: false
+  checked: '2026-08-13'
+x-evidence:
+- url: https://docs.adquick.com/campaigns
+  status: 200
+  note: no rate-limit section; pagination documented (current_page/next_page/total_pages/total_entries)
+- url: https://www.adquick.com/mcp/usage-documentation
+  status: 200
+  note: no rate limits specified
+- url: https://api.adquick.com/
+  status: 404
+  note: live problem+json response carried no rate-limit headers

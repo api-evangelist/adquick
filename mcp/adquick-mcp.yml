@@ -100,3 +100,25 @@ privacy:
   data_residency: US (Google Cloud Platform)
   log_retention: Tool invocation logs retained for 12 months
   third_party_sharing: [Exa (web search queries), Slack (internal operational notifications)]
+deployment:
+  mode: remote
+  endpoint: https://www.adquick.com/mcp
+  auth: oauth
+  verified: probed
+  checked: '2026-08-13'
+  note: >-
+    Remote-only. AdQuick ships a hosted Streamable HTTP endpoint an MCP client POSTs to directly;
+    there is no stdio package - no npm/PyPI/RubyGems/crates package exists under the AdQuick name
+    (see packages/adquick-packages.yml) and the public GitHub org contains no MCP server repo.
+introspection:
+  tools_list_probed: '2026-08-13'
+  http_status: 401
+  response: '{"error":"unauthorized","error_description":"The access token is invalid"}'
+  input_schemas_available: false
+  note: >-
+    Anonymous JSON-RPC tools/list and initialize both return HTTP 401. The tool names and
+    descriptions above are the provider-published list from the connector usage documentation;
+    per-tool inputSchemas require an authenticated OAuth introspection and are NOT captured here.
+    The anonymous OAuth discovery documents (RFC 8414 / RFC 9728) ARE served and are saved verbatim
+    in well-known/.
+crosswalk: mcp/adquick-tool-crosswalk.yml

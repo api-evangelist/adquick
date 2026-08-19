@@ -1,0 +1,177 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.adquick.com/campaigns (field-level), conventions/adquick-conventions.yml (documented
+  REST paths), mcp/adquick-mcp.yml (MCP resources + tool surface)
+notes: >-
+  DERIVED WITHOUT A SPEC. AdQuick publishes no OpenAPI and no object reference, so this entity graph
+  is assembled only from fields and paths that appear verbatim in the readable developer
+  documentation and from the MCP server's published resource URIs and tool names. Entities whose
+  existence is implied by a tool name but whose fields are not published are marked
+  fields_published: false and carry NO invented attributes. Relationship directions marked
+  inferred: true come from path shape (e.g. POST /creatives/:id/campaign/:campaign_id) rather than a
+  documented schema. Nothing here is a guess at a payload.
+identifiers:
+  campaign:
+    field: token
+    type: string
+    note: campaign creation returns a `token` string identifier; campaign paths use /campaigns/:id
+  geography:
+    dma: Nielsen DMA ID (integer)
+    zip: U.S. ZIP code (string)
+    market: Market ID (integer)
+entities:
+- name: Campaign
+  fields_published: true
+  source: https://docs.adquick.com/campaigns
+  attributes:
+  - name: campaign_type
+    type: enum
+    values: [direct, rtb]
+    required: true
+  - name: partner_id
+    type: integer
+    required: true
+  - name: advertiser_id
+    type: integer
+    required: true
+  - name: start_date
+    type: string
+    format: MM/DD/YYYY
+    required: true
+  - name: end_date
+    type: string
+    format: MM/DD/YYYY
+    required: true
+  - name: target_budget_cents
+    type: integer
+    currency: USD
+    required: true
+  - name: placements
+    type: array
+    required: false
+  - name: geographies
+    type: array
+    required: false
+  - name: media_types
+    type: array
+    required: false
+  - name: token
+    type: string
+    role: identifier
+    returned: true
+  - name: status
+    type: string
+    note: exposed as a list filter on GET /campaigns
+  operations:
+  - POST /campaigns
+  - GET /campaigns
+  - GET /campaigns/:id
+  - POST /campaigns/:id/book
+- name: Partner
+  fields_published: false
+  note: referenced by Campaign.partner_id; no partner endpoint documented
+- name: Advertiser
+  fields_published: false
+  note: referenced by Campaign.advertiser_id; no advertiser endpoint documented
+- name: Creative
+  fields_published: false
+  source: conventions/adquick-conventions.yml
+  operations:
+  - POST /creatives
+  - GET /creatives
+  - GET /creatives/:id
+  - POST /creatives/:id/campaign/:campaign_id
+  note: field list not published on any reachable documentation page
+- name: MediaType
+  fields_published: false
+  operations:
+  - GET /media_types
+  mcp_resource: inventory://media-types
+  note: reference data; media types and subtypes
+- name: Report
+  fields_published: false
+  operations:
+  - GET /reports
+  note: in-flight delivery reporting; report types vary by campaign type
+- name: Market
+  fields_published: false
+  mcp_resource: inventory://markets
+  note: DMA market reference data, surfaced through MCP list_markets / get_location_metrics
+- name: Supplier
+  fields_published: false
+  mcp_resource: inventory://suppliers
+  note: media-owner directory, surfaced through MCP get_supplier_inventory / get_supplier_metrics
+- name: Unit
+  fields_published: false
+  note: an individual OOH placement; surfaced through MCP get_unit_details / check_availability; corresponds to Campaign.placements
+- name: Audience
+  fields_published: false
+  note: audience segment attachable to a campaign; MCP list/add/remove_audiences_from_campaign
+- name: ProgrammaticPlan
+  fields_published: false
+  note: DSP plan entity, MCP-only (get_recent_programmatic_plans, get_programmatic_pacing)
+- name: ScheduledTask
+  fields_published: false
+  note: Copilot recurring task, MCP-only (schedule_copilot_task_from_template)
+relationships:
+- from: Campaign
+  to: Partner
+  type: belongs_to
+  via: partner_id
+  inferred: false
+- from: Campaign
+  to: Advertiser
+  type: belongs_to
+  via: advertiser_id
+  inferred: false
+- from: Campaign
+  to: Unit
+  type: has_many
+  via: placements
+  inferred: false
+- from: Campaign
+  to: MediaType
+  type: has_many
+  via: media_types
+  inferred: false
+- from: Campaign
+  to: Market
+  type: has_many
+  via: geographies
+  inferred: false
+- from: Campaign
+  to: Creative
+  type: has_many
+  via: POST /creatives/:id/campaign/:campaign_id
+  inferred: true
+- from: Campaign
+  to: Audience
+  type: has_many
+  via: MCP add_audiences_to_campaign
+  inferred: true
+- from: Campaign
+  to: Report
+  type: has_many
+  via: GET /reports
+  inferred: true
+- from: Unit
+  to: Supplier
+  type: belongs_to
+  via: MCP get_supplier_inventory
+  inferred: true
+- from: Unit
+  to: Market
+  type: belongs_to
+  via: MCP search_inventory / get_location_metrics
+  inferred: true
+- from: Unit
+  to: MediaType
+  type: belongs_to
+  via: MCP list_media_types
+  inferred: true
+gaps:
+- Creative field schema is not published
+- Unit/inventory field schema is not published (MCP inputSchemas are OAuth-gated)
+- Report response schema is not published
+checked: '2026-08-13'

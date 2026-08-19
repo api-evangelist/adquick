@@ -1,0 +1,42 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  Public registry searches (npm, PyPI, RubyGems, crates.io) plus the AdQuick GitHub
+  organization (https://github.com/adquick) on 2026-08-13.
+notes: >-
+  AdQuick publishes NO first-party client library on any public package registry. Every registry
+  probed returned zero matching packages, and the public GitHub organization contains 11 repositories,
+  all of which are forks of third-party open-source projects (sidekiq-job_alert, html2text_ruby,
+  best_in_place, diodb, react-daterange-picker, Casper, anycable-rails, activeadmin_json_editor,
+  blazer, pairing-challenge, rails-mini-profiler) with no AdQuick SDK among them. Integration is
+  therefore direct HTTP against the partner REST API (X-PARTNER-TOKEN) or via the hosted MCP server.
+  No `SDKs` pointer is emitted because no official client library exists to point at.
+package_count: 0
+packages: []
+registries_probed:
+- registry: npm
+  endpoint: https://registry.npmjs.org/-/v1/search?text=adquick
+  status: 200
+  results: 0
+- registry: pypi
+  endpoint: https://pypi.org/pypi/adquick/json
+  status: 404
+  results: 0
+- registry: rubygems
+  endpoint: https://rubygems.org/api/v1/search.json?query=adquick
+  status: 200
+  results: 0
+- registry: crates.io
+  endpoint: https://crates.io/api/v1/crates?q=adquick
+  status: 200
+  results: 0
+source_code:
+- name: AdQuick GitHub organization
+  url: https://github.com/adquick
+  status: 200
+  public_repos: 11
+  first_party_sdks: 0
+  note: all public repositories are forks of third-party projects; no AdQuick-authored client library
+x-evidence:
+  checked: '2026-08-13'
+  api_docs_sdk_mentions: none found (docs.adquick.com is Cloudflare bot-challenged to automated fetch)
