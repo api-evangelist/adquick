@@ -37,6 +37,16 @@ tags:
 - Company
 - Enterprise Saas
 - Advertising
+- Out-of-Home Advertising
+- DOOH
+- Programmatic Advertising
+- Media Buying
+- Marketing
+- MCP
+tags_raw:
+- Company
+- Enterprise Saas
+- Advertising
 - Out Of Home Advertising
 - DOOH
 - Programmatic Advertising
@@ -52,6 +62,10 @@ apis:
   humanURL: https://docs.adquick.com/
   baseURL: https://api.adquick.com
   tags:
+  - Advertising
+  - Out-of-Home Advertising
+  - Campaigns
+  tags_raw:
   - Advertising
   - Out Of Home Advertising
   - Campaigns
