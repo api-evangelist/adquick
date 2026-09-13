@@ -5,8 +5,7 @@ source: https://www.adquick.com/mcp/usage-documentation
 server:
   name: AdQuick MCP Server
   display_name: AdQuick for Claude
-  description: >-
-    Search OOH inventory, manage campaigns, analyze markets, and generate reports across US
+  description: Search OOH inventory, manage campaigns, analyze markets, and generate reports across US
     out-of-home advertising through natural language. Distributed in the Claude Connectors Directory.
   transport: http
   transport_detail: Streamable HTTP
@@ -21,7 +20,7 @@ auth:
   type: oauth2
   flow: authorization_code
   pkce: S256
-  dynamic_client_registration: true            # RFC 7591
+  dynamic_client_registration: true
   authorization_endpoint: https://www.adquick.com/mcp/oauth/authorize
   token_endpoint: https://www.adquick.com/mcp/oauth/token
   registration_endpoint: https://www.adquick.com/mcp/oauth/register
@@ -43,82 +42,178 @@ resources:
 tool_groups:
 - name: Inventory Discovery
   tools:
-  - {name: search_inventory, access: read, description: Search units by location, media type, screen type, and filters}
-  - {name: check_availability, access: read, description: Check if a unit is available for a date range}
-  - {name: find_avails, access: read, description: Find available units for a campaign's date range}
-  - {name: get_unit_details, access: read, description: Get detailed specs, pricing, and images for a unit}
-  - {name: get_supplier_inventory, access: read, description: List inventory for a specific supplier}
-  - {name: list_markets, access: read, description: List all available DMA markets}
-  - {name: list_media_types, access: read, description: List media types and subtypes}
-  - {name: search_locations, access: read, description: Search cities, neighborhoods, and zip codes with inventory}
+  - name: search_inventory
+    access: read
+    description: Search units by location
+    media type: null
+    screen type: null
+    and filters: null
+  - name: check_availability
+    access: read
+    description: Check if a unit is available for a date range
+  - name: find_avails
+    access: read
+    description: Find available units for a campaign's date range
+  - name: get_unit_details
+    access: read
+    description: Get detailed specs
+    pricing: null
+    and images for a unit: null
+  - name: get_supplier_inventory
+    access: read
+    description: List inventory for a specific supplier
+  - name: list_markets
+    access: read
+    description: List all available DMA markets
+  - name: list_media_types
+    access: read
+    description: List media types and subtypes
+  - name: search_locations
+    access: read
+    description: Search cities
+    neighborhoods: null
+    and zip codes with inventory: null
 - name: Campaign Management
   tools:
-  - {name: create_campaign, access: write, description: Create a new campaign with optional location/inventory filters}
-  - {name: update_campaign, access: write, description: Update campaign metadata, dates, budget, or targeting}
-  - {name: clone_campaign, access: write, description: Duplicate an existing campaign}
-  - {name: import_campaign_from_csv, access: write, description: Create a campaign by importing units from CSV}
-  - {name: add_units_to_campaign, access: write, description: Add units to an existing campaign}
-  - {name: restore_campaign_units, access: write, description: Restore previously deleted units}
-  - {name: list_campaign_audiences, access: read, description: List audience segments on a campaign}
-  - {name: add_audiences_to_campaign, access: write, description: Add audience segments to a campaign}
-  - {name: remove_audiences_from_campaign, access: delete, description: Remove audience segments from a campaign}
+  - name: create_campaign
+    access: write
+    description: Create a new campaign with optional location/inventory filters
+  - name: update_campaign
+    access: write
+    description: Update campaign metadata
+    dates: null
+    budget: null
+    or targeting: null
+  - name: clone_campaign
+    access: write
+    description: Duplicate an existing campaign
+  - name: import_campaign_from_csv
+    access: write
+    description: Create a campaign by importing units from CSV
+  - name: add_units_to_campaign
+    access: write
+    description: Add units to an existing campaign
+  - name: restore_campaign_units
+    access: write
+    description: Restore previously deleted units
+  - name: list_campaign_audiences
+    access: read
+    description: List audience segments on a campaign
+  - name: add_audiences_to_campaign
+    access: write
+    description: Add audience segments to a campaign
+  - name: remove_audiences_from_campaign
+    access: delete
+    description: Remove audience segments from a campaign
 - name: Analytics & Insights
   tools:
-  - {name: get_supplier_metrics, access: read, description: Unit counts, impressions, CPM, and market coverage per supplier}
-  - {name: get_supplier_bookings, access: read, description: Historical booking/revenue data by supplier}
-  - {name: get_location_metrics, access: read, description: Market-level metrics (CPM, pricing, unit counts, suppliers)}
-  - {name: get_location_budget, access: read, description: Entry, saturation, and domination budgets per market}
-  - {name: get_audience, access: read, description: Find matching audience segments by keywords}
-  - {name: recommend_markets, access: read, description: AI-powered market recommendations based on audience fit and budget}
-  - {name: get_campaign_delivery_status, access: read, description: Live delivery status for booked campaign units}
+  - name: get_supplier_metrics
+    access: read
+    description: Unit counts
+    impressions: null
+    CPM: null
+    and market coverage per supplier: null
+  - name: get_supplier_bookings
+    access: read
+    description: Historical booking/revenue data by supplier
+  - name: get_location_metrics
+    access: read
+    description: Market-level metrics (CPM
+    pricing: null
+    unit counts: null
+    suppliers): null
+  - name: get_location_budget
+    access: read
+    description: Entry
+    saturation: null
+    and domination budgets per market: null
+  - name: get_audience
+    access: read
+    description: Find matching audience segments by keywords
+  - name: recommend_markets
+    access: read
+    description: AI-powered market recommendations based on audience fit and budget
+  - name: get_campaign_delivery_status
+    access: read
+    description: Live delivery status for booked campaign units
 - name: Exports & Reports
   tools:
-  - {name: generate_multi_campaign_export, access: write, description: Combined spend export across multiple campaigns}
-  - {name: generate_multi_campaign_monthly_export, access: write, description: Monthly spend breakdown (CSV)}
-  - {name: generate_campaign_media_plan_pdf, access: write, description: Media plan PDF for a campaign}
-  - {name: generate_campaign_units_tag_export, access: write, description: Units export filtered by tags (CSV/XLSX)}
-  - {name: generate_market_budget_export, access: write, description: Market budget data export (CSV)}
+  - name: generate_multi_campaign_export
+    access: write
+    description: Combined spend export across multiple campaigns
+  - name: generate_multi_campaign_monthly_export
+    access: write
+    description: Monthly spend breakdown (CSV)
+  - name: generate_campaign_media_plan_pdf
+    access: write
+    description: Media plan PDF for a campaign
+  - name: generate_campaign_units_tag_export
+    access: write
+    description: Units export filtered by tags (CSV/XLSX)
+  - name: generate_market_budget_export
+    access: write
+    description: Market budget data export (CSV)
 - name: Programmatic DSP
   tools:
-  - {name: get_recent_programmatic_plans, access: read, description: Recently launched DSP plans}
-  - {name: search_programmatic_campaigns, access: read, description: Search plans by name}
-  - {name: get_programmatic_pacing, access: read, description: Pacing status for active plans}
-  - {name: get_plans_by_date_range, access: read, description: Plans filtered by date range}
-  - {name: get_plans_not_yet_live, access: read, description: Plans scheduled but not yet activated}
-  - {name: diagnose_plan_pacing, access: read, description: Detailed pacing diagnosis for under-delivering plans}
+  - name: get_recent_programmatic_plans
+    access: read
+    description: Recently launched DSP plans
+  - name: search_programmatic_campaigns
+    access: read
+    description: Search plans by name
+  - name: get_programmatic_pacing
+    access: read
+    description: Pacing status for active plans
+  - name: get_plans_by_date_range
+    access: read
+    description: Plans filtered by date range
+  - name: get_plans_not_yet_live
+    access: read
+    description: Plans scheduled but not yet activated
+  - name: diagnose_plan_pacing
+    access: read
+    description: Detailed pacing diagnosis for under-delivering plans
 - name: Scheduling
   tools:
-  - {name: schedule_copilot_task_from_template, access: write, description: Schedule a recurring task (e.g., weekly launch readiness alerts)}
-  - {name: list_copilot_scheduled_tasks, access: read, description: List your scheduled tasks}
-  - {name: cancel_copilot_scheduled_task, access: delete, description: Cancel a scheduled task}
+  - name: schedule_copilot_task_from_template
+    access: write
+    description: Schedule a recurring task (e.g.
+    weekly launch readiness alerts): null
+  - name: list_copilot_scheduled_tasks
+    access: read
+    description: List your scheduled tasks
+  - name: cancel_copilot_scheduled_task
+    access: delete
+    description: Cancel a scheduled task
 - name: Utility
   tools:
-  - {name: show_support_card, access: read, description: Display AdQuick support contact information}
+  - name: show_support_card
+    access: read
+    description: Display AdQuick support contact information
 tool_count: 39
 privacy:
   policy: https://www.adquick.com/privacy
   data_residency: US (Google Cloud Platform)
   log_retention: Tool invocation logs retained for 12 months
-  third_party_sharing: [Exa (web search queries), Slack (internal operational notifications)]
+  third_party_sharing:
+  - Exa (web search queries)
+  - Slack (internal operational notifications)
 deployment:
   mode: remote
   endpoint: https://www.adquick.com/mcp
-  auth: oauth
   verified: probed
-  checked: '2026-08-13'
-  note: >-
-    Remote-only. AdQuick ships a hosted Streamable HTTP endpoint an MCP client POSTs to directly;
-    there is no stdio package - no npm/PyPI/RubyGems/crates package exists under the AdQuick name
-    (see packages/adquick-packages.yml) and the public GitHub org contains no MCP server repo.
+  probe: gated
+  checked: '2026-09-11'
+  source: wall re-adjudication 2026-09-11 (RFC 9728 / JSON-RPC envelope)
+  probe_prior: wall
+  probe_why: auth is path-specific (nonsense control differs)
 introspection:
   tools_list_probed: '2026-08-13'
   http_status: 401
   response: '{"error":"unauthorized","error_description":"The access token is invalid"}'
   input_schemas_available: false
-  note: >-
-    Anonymous JSON-RPC tools/list and initialize both return HTTP 401. The tool names and
-    descriptions above are the provider-published list from the connector usage documentation;
-    per-tool inputSchemas require an authenticated OAuth introspection and are NOT captured here.
-    The anonymous OAuth discovery documents (RFC 8414 / RFC 9728) ARE served and are saved verbatim
-    in well-known/.
+  note: Anonymous JSON-RPC tools/list and initialize both return HTTP 401. The tool names and descriptions
+    above are the provider-published list from the connector usage documentation; per-tool inputSchemas
+    require an authenticated OAuth introspection and are NOT captured here. The anonymous OAuth discovery
+    documents (RFC 8414 / RFC 9728) ARE served and are saved verbatim in well-known/.
 crosswalk: mcp/adquick-tool-crosswalk.yml
