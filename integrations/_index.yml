@@ -27,3 +27,16 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: adquick-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/A06DM215R1S-adquick-ai
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
