@@ -1,34 +1,22 @@
-generated: '2026-10-14'
+generated: '2026-10-20'
+method: searched
+source:
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/adquick
+- https://zapier.com/apps/adquick/integrations
+- https://n8n.io/integrations/adquick/
+- https://composio.dev/toolkits/adquick
+- https://monid.ai/tools/adquick
+checked:
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/adquick
+- shopify/integrations/shopify-integration-edges.yml
+- slack/integrations/slack-integration-edges.yml
+- https://composio.dev/toolkits/adquick
+- https://monid.ai/tools/adquick
+- https://n8n.io/integrations/adquick/
+- https://zapier.com/apps/adquick/integrations
+summary: null
+marketplace_apps: []
 edges:
-- partner_name: Twilio Segment
-  partner: segment
-  partner_match: aggregator
-  marketplace: segment-partner-destinations
-  channel: partner-built
-  direction: third-party
-  type: marketplace
-  relationship: platform-app
-  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/adquick
-  coverage_role:
-  - destination
-  cdp_signals:
-    destination:
-      catalog_entries:
-      - adquick
-      status: PUBLIC
-      partner_owned: true
-      connection_modes:
-      - cloud:mobile
-      - cloud:server
-      - cloud:web
-      accepted_methods:
-      - Alias
-      - Group
-      - Identify
-      - Page
-      - Track
-  detected_by: sweep-cdp.py
-  first_seen: '2026-10-14'
 - partner_name: Shopify (own)
   partner: shopify
   partner_match: mirror
@@ -62,9 +50,33 @@ edges:
   detected: '2026-10-18'
   detected_by: mirror-platform-listings.py
   category: Slack app
-method: searched
-checked:
-- https://www.twilio.com/docs/segment/connections/destinations/catalog/adquick
-- shopify/integrations/shopify-integration-edges.yml
-- slack/integrations/slack-integration-edges.yml
-source: https://www.twilio.com/docs/segment/connections/destinations/catalog/adquick
+- partner_name: Twilio Segment
+  partner: segment
+  partner_match: aggregator
+  marketplace: segment-partner-destinations
+  channel: partner-built
+  direction: third-party
+  type: marketplace
+  relationship: platform-app
+  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/adquick
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - adquick
+      status: PUBLIC
+      partner_owned: true
+      connection_modes:
+      - cloud:mobile
+      - cloud:server
+      - cloud:web
+      accepted_methods:
+      - Alias
+      - Group
+      - Identify
+      - Page
+      - Track
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+templates: []
