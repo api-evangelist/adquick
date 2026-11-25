@@ -90,27 +90,27 @@ Model Context Protocol servers that expose the API to agents.
 
 Authentication, trust centre, and vulnerability disclosure.
 
-- [Adquick Authentication](https://apis.io/security/adquick/adquick-authentication/)
-- [Adquick Domain Security](https://apis.io/security/adquick/adquick-domain-security/)
-- [Adquick Trust Center](https://apis.io/security/adquick/adquick-trust-center/)
+- [AdQuick Authentication](https://apis.io/security/adquick/adquick-authentication/)
+- [AdQuick Domain Security](https://apis.io/security/adquick/adquick-domain-security/)
+- [AdQuick Trust Center](https://apis.io/security/adquick/adquick-trust-center/)
 
 #### OAuth scopes (1)
 
 The permissions the API asks for.
 
-- [Adquick Scopes](https://apis.io/scopes/adquick/adquick-scopes/)
+- [AdQuick Scopes](https://apis.io/scopes/adquick/adquick-scopes/)
 
 #### Plans and pricing (1)
 
 Published plans, tiers and prices.
 
-- [Adquick Plans Pricing](https://apis.io/plans/adquick/adquick-plans-pricing/)
+- [AdQuick Plans Pricing](https://apis.io/plans/adquick/adquick-plans-pricing/)
 
 #### Rate limits (1)
 
 Published request limits.
 
-- [Adquick Rate Limits](https://apis.io/rate-limits/adquick/adquick-rate-limits/)
+- [AdQuick Rate Limits](https://apis.io/rate-limits/adquick/adquick-rate-limits/)
 
 ## Where to find this API
 
@@ -127,18 +127,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 28.5** — thin · rubric 0.25.0 · scored 2026-10-23
+**Kin Score 28.9** — thin · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
 | Discoverability | 75.0 |
 | Contract quality | 0.0 |
 | Contract governance | 18.2 |
-| Operational transparency | 2.6 |
+| Operational transparency | 4.8 |
 | Developer ergonomics | 58.9 |
-| Access clarity | 18.4 |
+| Access clarity | 23.4 |
 
-**Agent readiness 33.6** — agent-ready
+**Agent readiness 32.9** — agent-ready
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -163,8 +163,12 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Agentic Commerce | — |
 | Pagination Ratio | na |
 | Operation Distinctiveness | na |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
-**Regulatory alignment 35.3** — Horizontal (data, software, accessibility, platform)
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
 
 The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/adquick/](https://apis.io/providers/adquick/).
 
